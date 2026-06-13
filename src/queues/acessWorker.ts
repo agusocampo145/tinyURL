@@ -7,7 +7,6 @@ const accessLogRepository = new AccessLogRepository();
 // Worker para procesar eventos de acceso en segundo plano
 export const accessWorker = new Worker(
   'access-events',
-  //Explicar async
   async (job) => {
     const event: AccessEvent = job.data;
     await accessLogRepository.create({

@@ -18,7 +18,7 @@ export class UrlService {
     }
 
     await this.urlRepository.create(dto.originalUrl, code);
-    //Explicar EX
+    
     await redis.set(code, dto.originalUrl, 'EX', CACHE_TTL);
 
     return `${process.env.BASE_URL}/${code}`;
