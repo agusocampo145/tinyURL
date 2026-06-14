@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { UrlController } from '../controllers/urlController';
 import { AccessLogRepository } from '../repositories/accessLogRepository';
 import { UrlRepository } from '../repositories/urlRepository';
-import { StatsService } from '../services/stateService';
+import { StatsService } from '../services/statsService';
 import { UrlService } from '../services/urlService';
 
 

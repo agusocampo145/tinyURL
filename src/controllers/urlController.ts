@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { StatsService } from '../services/stateService';
+import { StatsService } from '../services/statsService';
 import { UrlService } from '../services/urlService';
 
 

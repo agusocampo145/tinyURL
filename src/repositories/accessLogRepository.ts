@@ -1,4 +1,4 @@
-import { IAccessLog, AccessLog } from "../models/acessLog";
+import { IAccessLog, AccessLog } from "../models/accessLog";
 
 export class AccessLogRepository {
   async create(data: {
