@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express';
 import urlRoutes from './routes/urlRoutes';
+import { errorHandler } from './middlewares/errorHandler';
 
 const app = express();
 
@@ -17,4 +18,5 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(status).json({ error: error.message });
 });
 
+app.use(errorHandler);
 export default app;

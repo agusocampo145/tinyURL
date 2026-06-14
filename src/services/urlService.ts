@@ -3,8 +3,9 @@ import { generateCode } from '../utils/generateCode';
 import { accessQueue } from '../queues/accessQueue';
 import { CreateUrlDto, AccessEvent } from '../types';
 import { UrlRepository } from '../repositories/urlRepository';
+import { AppError } from '../middlewares/errorHandler';
 
-const CACHE_TTL = 3600; // 1 hora en segundos
+const CACHE_TTL = 3600;
 
 export class UrlService {
   constructor(private readonly urlRepository: UrlRepository) {}
@@ -14,11 +15,10 @@ export class UrlService {
 
     if (dto.alias) {
       const exists = await this.urlRepository.existsByCode(dto.alias);
-      if (exists) throw new Error('Alias already in use');
+      if (exists) throw new AppError('Alias already in use', 409);
     }
 
     await this.urlRepository.create(dto.originalUrl, code);
-    
     await redis.set(code, dto.originalUrl, 'EX', CACHE_TTL);
 
     return `${process.env.BASE_URL}/${code}`;
@@ -35,9 +35,8 @@ export class UrlService {
 
   private async resolveFromDb(code: string): Promise<string> {
     const url = await this.urlRepository.findByCode(code);
-    if (!url) throw new Error('URL not found');
+    if (!url) throw new AppError('URL not found', 404);
 
-    // Recarga el cache para proximas requests
     await redis.set(code, url.originalUrl, 'EX', CACHE_TTL);
     return url.originalUrl;
   }
