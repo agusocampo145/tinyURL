@@ -69,7 +69,7 @@ GET /api/urls/mi-alias/stats
 ```
 ## Decisiones tecnicas
 ### BullMQ como cola de mensajes  
-Se evaluaron distintas opciones para el procesamiento asincrónico de eventos (RabbitMQ, Bull, BullMQ).   
+Se evaluaron distintas opciones para el procesamiento asincrónico de eventos (RabbitMQ, BullMQ).   
 Se optó por BullMQ porque:  
 Se integra nativamente con Redis, que ya forma parte del stack, evitando incorporar nueva infraestructura.
 Ofrece soporte nativo de TypeScript.
