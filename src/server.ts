@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { connectDB } from './config/db';
 import process from 'process';
-import { accessWorker } from './queues/acessWorker';
+import { accessWorker } from './queues/accessWorker';
 import app from './app';
 
 

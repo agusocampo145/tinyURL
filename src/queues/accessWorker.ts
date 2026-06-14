@@ -9,6 +9,8 @@ export const accessWorker = new Worker(
   'access-events',
   async (job) => {
     const event: AccessEvent = job.data;
+    // Timeout para poder testear en local el funcionamiento de la encolacion asincrona, en local es muy rapido el procesamiento y no se nota la diferencia.
+    //await new Promise(resolve => setTimeout(resolve, 3000));
     await accessLogRepository.create({
       code: event.code,
       ip: event.ip,

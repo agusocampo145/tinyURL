@@ -31,7 +31,7 @@ export class UrlController {
             const userAgent = toString(req.headers['user-agent']);
 
             const originalUrl = await this.urlService.resolveUrl(code, ip, userAgent);
-            res.redirect(301, originalUrl);
+            res.redirect(302, originalUrl);
         } catch (error) {
             next(error);
         }
